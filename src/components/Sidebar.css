@@ -1,0 +1,119 @@
+/* src/components/Sidebar.css */
+/* Base Styles (Mobile First) */
+.app-sidebar {
+    position: absolute;
+    /* or fixed, depending on parent context */
+    top: 60px;
+    /* Mobile top offset */
+    left: 0;
+    width: 280px;
+    /* Mobile width usually safe default or 100% depending on design. Using previous mobile width logic from media query */
+    height: calc(100% - 60px);
+    background: rgba(20, 20, 30, 0.95);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transition: transform 0.3s ease-in-out;
+    z-index: 2000;
+    /* Mobile z-index */
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-100%);
+    /* Default closed/hidden on mobile */
+}
+
+.app-sidebar.open {
+    transform: translateX(0);
+}
+
+/* Sidebar Internal Elements (Mobile Base) */
+.sidebar-header {
+    padding: 12px;
+    /* Mobile padding */
+}
+
+.logo {
+    font-size: 16px;
+    /* Mobile size */
+}
+
+.subtitle {
+    font-size: 11px;
+    /* Mobile size */
+}
+
+.section h5 {
+    font-size: 13px;
+    /* Mobile size */
+}
+
+.controls button {
+    font-size: 13px;
+    padding: 8px 12px;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 6px;
+    background: transparent;
+    color: var(--muted);
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.muted {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.list-actions button {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+}
+
+.list-actions button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Desktop Enhancements (Min-Width) */
+@media (min-width: 769px) {
+    .app-sidebar {
+        width: 300px;
+        /* Desktop width */
+        z-index: 1000;
+        /* Desktop transform behavior might be managed by parent or different logic, but if basic sidebar: */
+        transform: translateX(0);
+        /* Default visible on desktop if not closed */
+    }
+
+    .sidebar-header {
+        padding: 14px;
+        /* Default/Desktop padding if different */
+    }
+
+    .logo {
+        font-size: 1.05rem;
+    }
+
+    .subtitle {
+        font-size: 0.85rem;
+    }
+
+    .section h5 {
+        font-size: 1em;
+    }
+
+    .controls button {
+        font-size: 1em;
+        padding: 0.6em 1.2em;
+    }
+
+    /* Tablet specific adjustments if needed inside min-width */
+    @media (max-width: 1024px) {
+        .app-sidebar {
+            width: 280px;
+        }
+    }
+}

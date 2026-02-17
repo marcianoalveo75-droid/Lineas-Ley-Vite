@@ -1,0 +1,540 @@
+/* src/App.css - theme */
+:root {
+  --bg: #0b0b0c;
+  --panel: #0f1620;
+  --muted: #9fb7c8;
+  --accent: #4ea1ff;
+  --glass: rgba(255, 255, 255, 0.03);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg);
+  color: #e6eef6;
+}
+
+/* App Root Container */
+.app-root {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Topbar Base (Mobile First) */
+.topbar {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  /* Mobile alignment */
+  width: calc(100% - 16px);
+  /* Mobile width */
+  z-index: 2100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  /* Mobile padding */
+  background: linear-gradient(180deg, rgba(6, 8, 10, 0.9), rgba(6, 8, 10, 0.75));
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  transform: none;
+  /* No transform interaction on mobile */
+}
+
+@media (min-width: 769px) {
+  .topbar {
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    max-width: 1200px;
+    padding: 8px 12px;
+  }
+}
+
+.topbar-left {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Brand Mobile First */
+.brand {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.brand-icon {
+  background: linear-gradient(180deg, var(--accent), #66b3ff);
+  color: #021726;
+  width: 32px;
+  /* Mobile size */
+  height: 32px;
+  font-size: 18px;
+  /* Mobile font */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.brand-title {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9rem;
+  /* Mobile */
+}
+
+.brand-sub {
+  font-size: 0.7rem;
+  /* Mobile */
+  color: var(--muted);
+}
+
+@media (min-width: 769px) {
+  .brand-icon {
+    width: 38px;
+    height: 38px;
+    font-size: inherit;
+    /* or explicit desktop size */
+  }
+
+  .brand-title {
+    font-size: inherit;
+  }
+
+  .brand-sub {
+    font-size: 0.8rem;
+  }
+}
+
+.icon-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  padding: 6px 8px;
+  /* Mobile */
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  /* Mobile */
+}
+
+@media (min-width: 769px) {
+  .icon-btn {
+    padding: 8px 10px;
+    font-size: inherit;
+  }
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.02);
+  color: #fff;
+}
+
+.topbar-right {
+  display: flex;
+  gap: 4px;
+  /* Mobile */
+  align-items: center;
+}
+
+@media (min-width: 769px) {
+  .topbar-right {
+    gap: 8px;
+  }
+}
+
+/* Mobile Overlay Default */
+.sidebar-overlay {
+  display: none;
+  /* Default hidden */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  z-index: 1900;
+  animation: fadeIn 0.3s ease;
+}
+
+@media (max-width: 768px) {
+
+  /* Only show overlay logic on mobile */
+  .sidebar-overlay.active {
+    /* Assuming we toggle a class or it is controlled via React */
+    display: block;
+  }
+
+  /* Note: React logic controls display: block/none via inline or class.
+       If logic uses display: block directly on element style, css is overridden.
+       But here we just define the style. */
+  .sidebar-overlay {
+    /* If the component renders it, it's visible. controlled by presence usually */
+    display: block;
+  }
+}
+
+/* Actually in the previous code, .sidebar-overlay was display: none, then display: block in media query.
+   Mobile First means display: block (if rendered) is default for mobile, and display: none for desktop.
+   But this overlay is "Mobile Only feature". So: */
+.sidebar-overlay {
+  display: block;
+  /* It exists on mobile */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  z-index: 1900;
+}
+
+@media (min-width: 769px) {
+  .sidebar-overlay {
+    display: none !important;
+    /* Never show on desktop */
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Sidebar Base (Mobile First) */
+.app-sidebar {
+  position: fixed;
+  top: 60px;
+  /* Mobile top */
+  left: 0;
+  width: 85%;
+  /* Mobile Width */
+  max-width: 320px;
+  bottom: 0px;
+  /* Mobile bottom */
+  background: linear-gradient(180deg, #071018 0%, #0e1720 100%);
+  border-radius: 0 12px 12px 0;
+  /* Mobile radius */
+  padding: 14px;
+  z-index: 2000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  overflow: auto;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-100%);
+  /* Default closed on mobile */
+}
+
+.app-sidebar.open {
+  transform: translateX(0);
+}
+
+.app-sidebar.closed {
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+
+@media (min-width: 769px) {
+  .app-sidebar {
+    top: 72px;
+    left: 12px;
+    width: 320px;
+    /* Desktop Fixed Width */
+    bottom: 12px;
+    border-radius: 12px;
+    transform: translateX(0);
+    /* Default open on desktop if state allows */
+  }
+
+  /* On desktop, 'closed' class handles hiding */
+  .app-sidebar.closed {
+    transform: translateX(-100%);
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .app-sidebar {
+    width: 280px;
+  }
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.bottom-bar span {
+  margin: 0 12px;
+  font-size: 0.9rem;
+}
+
+/* Map Area Base (Mobile First) */
+.map-area {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /* Mobile Left */
+  width: 100%;
+  /* Mobile Width */
+  transition: left .2s ease;
+}
+
+.map-area.with-sidebar {
+  width: 100%;
+  /* Mobile: Sidebar overlays map, so map stays full width */
+  left: 0;
+}
+
+@media (min-width: 769px) {
+  .map-area.with-sidebar {
+    left: 352px;
+    /* Desktop Sidebar Width + Gap */
+    width: auto;
+    /* Calculate automatically or 100% - offset */
+  }
+
+  .map-area.full {
+    left: 0;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .map-area.with-sidebar {
+    left: 304px;
+    /* Tablet Sidebar Width + Gap */
+  }
+}
+
+/* Base Bottom Bar (Mobile) */
+.bottom-bar {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1400;
+  background: rgba(6, 8, 10, 0.7);
+  padding: 6px 10px;
+  /* Mobile Padding */
+  border-radius: 999px;
+  color: var(--muted);
+  display: flex;
+  gap: 6px;
+  /* Mobile Gap */
+  font-size: 0.7rem;
+  /* Mobile Font */
+  flex-wrap: wrap;
+  /* Mobile wrap */
+  max-width: calc(100% - 24px);
+  /* Mobile width limit */
+}
+
+@media (min-width: 769px) {
+  .bottom-bar {
+    padding: 8px 12px;
+    gap: 12px;
+    font-size: inherit;
+    /* Default */
+    flex-wrap: nowrap;
+    max-width: none;
+  }
+}
+
+
+/* Mobile Specific Utilities (No Desktop Equivalent usually) */
+
+.leaflet-control-container .leaflet-bottom {
+  bottom: 80px !important;
+  /* Mobile bottom padding for nav */
+}
+
+.leaflet-control-container .leaflet-top {
+  top: 10px !important;
+}
+
+@media (min-width: 769px) {
+
+  /* Reset Leaflet controls for Desktop */
+  .leaflet-control-container .leaflet-bottom {
+    bottom: 0 !important;
+  }
+
+  .leaflet-control-container .leaflet-top {
+    top: 0 !important;
+  }
+}
+
+/* Mobile Center Selection Box */
+.center-selection-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  max-width: 300px;
+  height: 300px;
+  transform: translate(-50%, -50%);
+  border: 2px dashed var(--sci-fi-cyan);
+  background: rgba(0, 240, 255, 0.1);
+  pointer-events: none;
+  z-index: 4000;
+  border-radius: 12px;
+  box-shadow: 0 0 15px var(--sci-fi-cyan-dim);
+  display: block;
+  /* Mobile default if component present */
+}
+
+.center-selection-box::after {
+  content: 'Área de Análisis';
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--sci-fi-cyan);
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--sci-fi-cyan);
+  white-space: nowrap;
+}
+
+/* Hide Selection Box on Desktop if desired, or keep as is if used on desktop */
+/* Assuming it's a mobile specific feature from previous CSS structure */
+
+.mobile-confirm-btn {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--sci-fi-cyan);
+  color: #000;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 0 15px var(--sci-fi-cyan);
+  z-index: 4001;
+  pointer-events: auto;
+  animation: pulse 2s infinite;
+}
+
+@media (min-width: 769px) {
+  .mobile-confirm-btn {
+    display: none;
+    /* Hide on desktop */
+  }
+
+  /* Assuming desktop has other controls for this */
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 240, 255, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 240, 255, 0);
+  }
+}
+
+/* Shared Utilities */
+.logo {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.draw-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.draw-btn.active {
+  background: rgba(255, 255, 255, 0.03);
+  color: #fff;
+}
+
+.save-btn {
+  padding: 10px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #021726;
+  border: none;
+  cursor: pointer;
+}
+
+/* Lists */
+.section {
+  margin-top: 12px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+.color-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.list-actions button {
+  margin-left: 6px;
+}

@@ -1,0 +1,177 @@
+/* src/theme/CyberTheme.css */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;500;600;700&display=swap');
+
+:root {
+    --cyber-primary: #00f0ff;
+    --cyber-primary-dim: rgba(0, 240, 255, 0.3);
+    --cyber-secondary: #0099ff;
+    --cyber-bg: #050a10;
+    --cyber-panel-bg: rgba(6, 12, 20, 0.85);
+    --cyber-glass: rgba(0, 240, 255, 0.05);
+    --cyber-border-color: rgba(0, 240, 255, 0.4);
+    --cyber-text: #e0f7fa;
+    --cyber-text-muted: #648da1;
+    --cyber-danger: #ff2a2a;
+    --cyber-warning: #ffeb3b;
+    --cyber-success: #00ff9d;
+
+    --font-hud: 'Orbitron', sans-serif;
+    --font-body: 'Rajdhani', sans-serif;
+}
+
+body {
+    background-color: var(--cyber-bg);
+    color: var(--cyber-text);
+    font-family: var(--font-body);
+    overflow: hidden;
+    /* Prevent body scroll, layout handles it */
+}
+
+/* === UTILITIES === */
+.cyber-panel {
+    background: var(--cyber-panel-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--cyber-border-color);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.1), inset 0 0 20px rgba(0, 240, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .cyber-panel {
+        backdrop-filter: none;
+        background: rgba(5, 10, 16, 0.95); /* More solid background for mobile */
+        box-shadow: 0 0 5px rgba(0, 240, 255, 0.1); /* Reduced shadow */
+    }
+}
+
+/* Corner Accents using pseudo elements - simple version */
+.cyber-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid var(--cyber-primary);
+    border-left: 2px solid var(--cyber-primary);
+    z-index: 2;
+}
+
+.cyber-panel::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid var(--cyber-primary);
+    border-right: 2px solid var(--cyber-primary);
+    z-index: 2;
+}
+
+.cyber-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--cyber-border-color);
+    background: linear-gradient(90deg, rgba(0, 240, 255, 0.1) 0%, transparent 100%);
+}
+
+.cyber-title {
+    font-family: var(--font-hud);
+    color: var(--cyber-primary);
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-shadow: 0 0 5px var(--cyber-primary);
+    margin: 0;
+}
+
+.cyber-button {
+    background: rgba(0, 240, 255, 0.1);
+    border: 1px solid var(--cyber-primary);
+    color: var(--cyber-primary);
+    padding: 8px 16px;
+    font-family: var(--font-hud);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.cyber-button:hover {
+    background: var(--cyber-primary);
+    color: #000;
+    box-shadow: 0 0 15px var(--cyber-primary);
+}
+
+.cyber-button.danger {
+    border-color: var(--cyber-danger);
+    color: var(--cyber-danger);
+    background: rgba(255, 42, 42, 0.1);
+}
+
+.cyber-button.danger:hover {
+    background: var(--cyber-danger);
+    color: #fff;
+    box-shadow: 0 0 15px var(--cyber-danger);
+}
+
+.cyber-button-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    font-size: 1.2rem;
+    clip-path: none;
+    border-radius: 4px;
+    /* Optional slight round for icon btns */
+}
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #020408;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--cyber-secondary);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--cyber-primary);
+}
+
+/* === HUD ELEMENTS === */
+.hud-line {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, var(--cyber-primary), transparent);
+    margin: 10px 0;
+    opacity: 0.5;
+}
+
+.data-value {
+    font-family: var(--font-hud);
+    font-size: 1.5rem;
+    color: #fff;
+    text-shadow: 0 0 10px var(--cyber-secondary);
+}
+
+.data-label {
+    font-size: 0.75rem;
+    color: var(--cyber-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}

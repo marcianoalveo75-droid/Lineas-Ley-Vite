@@ -1,0 +1,129 @@
+/* src/features/auth/Login.css */
+/* Base Styles (Mobile First) */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw !important;
+    /* Forzando ancho total del viewport */
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: white;
+    padding: 5px;
+    /* Padding mínimo para forzar expansión */
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.login-box {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px 20px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 95vw !important;
+    /* Ancho exagerado: 95% de la pantalla */
+    max-width: 600px !important;
+    /* Aumentado drásticamente */
+    box-sizing: border-box;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+@media (min-width: 769px) {
+    .login-box {
+        padding: 40px;
+    }
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    /* Mobile Size */
+    background: linear-gradient(to right, #c56bff, #4ea1ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@media (min-width: 769px) {
+    .login-header h1 {
+        font-size: 1.8rem;
+    }
+}
+
+.login-header p {
+    margin: 5px 0 0;
+    color: #a0a0b0;
+    font-size: 0.9rem;
+    /* Readability */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #d0d0e0;
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+    /* Ensure padding doesnt overflow width */
+}
+
+.form-group input:focus {
+    border-color: #c56bff;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to right, #c56bff, #4ea1ff);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.login-btn:hover {
+    opacity: 0.9;
+}
+
+.login-footer {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.link-btn {
+    background: none;
+    border: none;
+    color: #a0a0b0;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.link-btn:hover {
+    color: white;
+    text-decoration: underline;
+}

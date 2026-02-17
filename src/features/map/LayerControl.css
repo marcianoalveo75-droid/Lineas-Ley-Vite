@@ -1,0 +1,166 @@
+/* Base Styles (Mobile First) */
+.layer-control {
+    position: absolute;
+    z-index: 1000;
+    pointer-events: auto;
+    background: transparent;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+}
+
+.toggle-btn {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1002;
+    transition: transform 0.2s ease;
+}
+
+.toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.layers-section-title {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: #888;
+    margin: 5px 0 2px 5px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.layers-separator {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 5px 0;
+}
+
+.layer-check {
+    margin-left: auto;
+    color: #4ea1ff;
+    font-weight: bold;
+}
+
+.layer-checkbox {
+    margin-left: auto;
+    font-size: 1rem;
+}
+
+.layer-checkbox.checked {
+    color: #4ea1ff;
+    text-shadow: 0 0 5px rgba(78, 161, 255, 0.5);
+}
+
+.layers-list {
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    border-radius: 12px;
+    padding: 8px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    opacity: 0;
+    transform: scale(0.95);
+    transform-origin: top left;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    max-height: 0;
+    width: 220px;
+    /* Slightly wider */
+    overflow: hidden;
+}
+
+.layer-control.open .layers-list {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+    max-height: 80vh;
+    /* Better for mobile */
+    overflow-y: auto;
+    width: 260px;
+    /* Slightly wider for new buttons */
+}
+
+.layer-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: white;
+    padding: 10px 12px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-align: left;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s ease;
+}
+
+.layer-icon {
+    font-size: 1.2rem;
+}
+
+.layer-name {
+    flex: 1;
+}
+
+.layer-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.layer-btn.active {
+    background: rgba(78, 161, 255, 0.2);
+    border-color: #4ea1ff;
+    color: #4ea1ff;
+    font-weight: bold;
+}
+
+/* Mobile Specifics (Default) */
+.layer-control.map-types-control {
+    top: 10px;
+    left: 10px;
+}
+
+.layer-control.external-tools-control {
+    bottom: 90px;
+    right: 10px;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* Desktop Enhancements (Min-Width) */
+@media (min-width: 769px) {
+    .layer-control {
+        top: 20px;
+        right: 20px;
+        /* Right align on desktop default */
+        left: auto;
+        align-items: flex-end;
+        /* Align to right */
+    }
+
+    .layers-list {
+        transform-origin: top right;
+        /* Expand from right */
+    }
+
+    .layer-control.map-types-control {
+        top: 20px;
+        right: 20px;
+        left: auto;
+    }
+}
